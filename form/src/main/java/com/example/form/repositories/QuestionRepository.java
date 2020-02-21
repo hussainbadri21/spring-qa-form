@@ -8,6 +8,8 @@ import org.springframework.data.mongodb.repository.Query;
 
 public interface QuestionRepository extends MongoRepository<QuestionsEntity, String> {
 
-  @Query(value = "{}",fields = "{'answer':0}")
+  @Query(value = "{qid:{$in:?0}}",fields = "{'answer':0}")
+  List<Questions> findByQid(List<Integer> question_ids);
+
   List<Questions> findByQidIn(List<Integer> question_ids);
 }
